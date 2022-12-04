@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wineyard.Api.6", "Wineyard.Api.6\Wineyard.Api.6.csproj", "{B6DC8A88-785F-4C19-8BE2-1923E2797EF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wineyard.Api.7", "Wineyard.Api.7\Wineyard.Api.7.csproj", "{237EF581-8A6F-4947-9D60-A7B33F032ED3}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A789326F-921A-4B3D-A972-949707E829CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +16,19 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6DC8A88-785F-4C19-8BE2-1923E2797EF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6DC8A88-785F-4C19-8BE2-1923E2797EF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6DC8A88-785F-4C19-8BE2-1923E2797EF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6DC8A88-785F-4C19-8BE2-1923E2797EF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{237EF581-8A6F-4947-9D60-A7B33F032ED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{237EF581-8A6F-4947-9D60-A7B33F032ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{237EF581-8A6F-4947-9D60-A7B33F032ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{237EF581-8A6F-4947-9D60-A7B33F032ED3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A789326F-921A-4B3D-A972-949707E829CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A789326F-921A-4B3D-A972-949707E829CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A789326F-921A-4B3D-A972-949707E829CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A789326F-921A-4B3D-A972-949707E829CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

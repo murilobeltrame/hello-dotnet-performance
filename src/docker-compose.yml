@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  wineyard.api.6:
+    image: ${DOCKER_REGISTRY-}wineyardapi
+    build:
+      context: .
+      dockerfile: Wineyard.Api.6/Dockerfile
+
+  wineyard.api.7:
+    image: ${DOCKER_REGISTRY-}wineyardapi
+    build:
+      context: .
+      dockerfile: Wineyard.Api.7/Dockerfile
+
