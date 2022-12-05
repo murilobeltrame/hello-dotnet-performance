@@ -1,4 +1,6 @@
-﻿namespace Wineyard.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Wineyard.Models
 {
     public class Grape
     {
@@ -12,6 +14,8 @@
         }
 
         public Guid Id { get; private set; }
+        [Required]
+        [MaxLength(100)]
         public string Name { get; private set; }
     }
 }

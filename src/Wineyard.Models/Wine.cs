@@ -1,4 +1,6 @@
-﻿namespace Wineyard.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Wineyard.Models
 {
     public class Wine
     {
@@ -16,8 +18,14 @@
         }
 
         public Guid Id { get; private set; }
+        [Required]
+        [MaxLength(200)]
         public string WineryName { get; private set; }
+        [Required]
+        [MaxLength(200)]
         public string Label { get; private set; }
+        [Required]
+        [MaxLength(100)]
         public string CountryName { get; private set; }
         public ICollection<Grape> Grapes { get; private set; }
         public ushort Vintage { get; private set; }
