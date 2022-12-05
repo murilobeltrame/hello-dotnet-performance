@@ -1,0 +1,1 @@
+docker run --rm --env POSTGRES_DB=Wineyard --env POSTGRES_USER=appuser --env POSTGRES_PASSWORD=mysecretpassword --publish 5432:5432 postgres:15-alpine
