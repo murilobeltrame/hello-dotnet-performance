@@ -34,5 +34,5 @@ jobs:
         # List of metadata for an image
         labels: murilobeltrame/wineyard-api
         # List of target platforms for build
-        platforms: linux/amd64,linuxarm64
+        platforms: linux/amd64,linux/arm64
         tags: 6
