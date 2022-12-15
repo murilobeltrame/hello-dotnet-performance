@@ -11,6 +11,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [6,7]
 
     steps:
     - uses: actions/checkout@v3
@@ -30,9 +33,9 @@ jobs:
       with:
         context: src/
         # Path to the Dockerfile
-        file: src/Wineyard.Api.6/Dockerfile
+        file: src/Wineyard.Api.${{ matrix.version }}/Dockerfile
         # List of metadata for an image
         labels: murilobeltrame/wineyard-api
         # List of target platforms for build
         platforms: linux/amd64,linux/arm64
-        tags: 6
+        tags: ${{ matrix.version }}
