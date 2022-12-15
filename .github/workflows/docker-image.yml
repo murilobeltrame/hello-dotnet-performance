@@ -25,3 +25,14 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         # Password or personal access token used to log against the Docker registry
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v3.2.0
+      with:
+        context: src/
+        # Path to the Dockerfile
+        file: src/Wineyard.Api.6/Dockerfile
+        # List of metadata for an image
+        labels: murilobeltrame/wineyard-api
+        # List of target platforms for build
+        platforms: linux/amd64,linuxarm64
+        tags: 6
