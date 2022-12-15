@@ -1,2 +1,2 @@
-docker buildx build --push --tag murilobeltrame/wineyard-api:6 --platform linux/amd64,linux/arm64 --file src/Wineyard.Api.6/Dockerfile src/
+docker buildx build --push --tag murilobeltrame/wineyard-api:6 --platform linux/amd64,linux/arm64 --file l src/
 # docker buildx build --tag murilobeltrame/wineyard-api:7 --platform linux/amd64,linux/arm64 --file src/Wineyard.Api.7/Dockerfile src/
