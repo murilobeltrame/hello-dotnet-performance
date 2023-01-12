@@ -52,7 +52,7 @@ resource "azurerm_linux_virtual_machine" "amd64vm" {
   ]
 
   os_disk {
-    caching              = "ReadWrite"
+    caching              = "None"
     storage_account_type = "Standard_LRS"
   }
 
@@ -69,10 +69,14 @@ resource "azurerm_virtual_machine_extension" "amd64vmext" {
   virtual_machine_id   = azurerm_linux_virtual_machine.amd64vm.id
   publisher            = "Microsoft.Azure.Extensions"
   type                 = "CustomScript"
-  type_handler_version = "2.0"
-  settings             = <<SETTINGS
+  type_handler_version = "2.1"
+  settings = <<SETTINGS
   {
-    "script": "${base64encode(templatefile("install_agent.sh", { download_url = "https://github.com/actions/runner/releases/download/v2.299.1/actions-runner-linux-x64-2.299.1.tar.gz", token = "${var.actions_token}" }))}"
+    "script": "${base64encode(templatefile("install_agent.sh", {
+  username     = "${var.admin_username}"
+  download_url = "https://github.com/actions/runner/releases/download/v2.299.1/actions-runner-linux-x64-2.299.1.tar.gz",
+  token        = "${var.actions_token}"
+}))}"
   }
   SETTINGS
 }

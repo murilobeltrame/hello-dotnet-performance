@@ -1,9 +1,27 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-apt update
-mkdir actions-runner && cd actions-runner
-# curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/download/v2.299.1/actions-runner-linux-x64-2.299.1.tar.gz
-curl -o actions-runner-linux.tar.gz -L ${download_url}
-tar xzf ./actions-runner-linux.tar.gz
-./config.sh --url https://github.com/murilobeltrame/hello-dotnet-performance --token ${token}
-./run.sh
+runnerpath="/home/${username}/ar"
+
+sudo -i -u ${username} bash <<EOF
+mkdir $runnerpath && cd $runnerpath
+echo "Download"
+curl -o actions-runner.tar.gz -L ${download_url}
+echo "Extract"
+tar xzf ./actions-runner.tar.gz
+EOF
+
+cd $runnerpath
+echo "Installing dependencies"
+./bin/installdependencies.sh
+
+sudo -i -u ${username} bash <<EOF
+cd $runnerpath
+echo "Configuring client"
+./config.sh --unattended --url https://github.com/murilobeltrame/hello-dotnet-performance --token ${token}
+EOF
+
+cd $runnerpath
+echo "Install service"
+./svc.sh install
+echo "Run service"
+./svc.sh start
