@@ -11,7 +11,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: ['${{secrets.X64_HOSTNAME}}','${{secrets.ARM64_HOSTNAME}}']
+        os: ['${{vars.X64_HOSTNAME}}','${{vars.ARM64_HOSTNAME}}']
     runs-on: ${{matrix.os}}
     steps:
     - uses: actions/checkout@v3
