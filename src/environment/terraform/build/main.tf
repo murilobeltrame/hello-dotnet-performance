@@ -26,8 +26,9 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes     = ["10.0.2.0/24"]
 }
 
-resource "azurerm_network_interface" "amd64nic" {
-  name                = "nic-amd64-${random_pet.random.id}"
+resource "azurerm_network_interface" "nic" {
+  for_each            = { for config in var.vm_configurations : config.prefix => config }
+  name                = "nic-${each.value.prefix}-${random_pet.random.id}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
@@ -38,17 +39,18 @@ resource "azurerm_network_interface" "amd64nic" {
   }
 }
 
-resource "azurerm_linux_virtual_machine" "amd64vm" {
-  name                            = "vm-amd64-${random_pet.random.id}"
+resource "azurerm_linux_virtual_machine" "vm" {
+  for_each                        = { for config in var.vm_configurations : config.prefix => config }
+  name                            = "${each.value.prefix}-${random_pet.random.id}"
   resource_group_name             = azurerm_resource_group.rg.name
   location                        = azurerm_resource_group.rg.location
-  size                            = "Standard_D2s_v5"
+  size                            = each.value.size
   admin_username                  = var.admin_username
   admin_password                  = var.admin_password
   disable_password_authentication = false
 
   network_interface_ids = [
-    azurerm_network_interface.amd64nic.id
+    azurerm_network_interface.nic[each.key].id
   ]
 
   os_disk {
@@ -57,16 +59,17 @@ resource "azurerm_linux_virtual_machine" "amd64vm" {
   }
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-focal"
-    sku       = "20_04-lts-gen2" // "20_04-lts-arm64"
-    version   = "20.04.202212140"
+    publisher = split(":", each.value.imageUrn)[0]
+    offer     = split(":", each.value.imageUrn)[1]
+    sku       = split(":", each.value.imageUrn)[2]
+    version   = split(":", each.value.imageUrn)[3]
   }
 }
 
-resource "azurerm_virtual_machine_extension" "amd64vmext" {
-  name                 = "vm-amd64-ext-${random_pet.random.id}"
-  virtual_machine_id   = azurerm_linux_virtual_machine.amd64vm.id
+resource "azurerm_virtual_machine_extension" "vm_ext" {
+  for_each             = { for config in var.vm_configurations : config.prefix => config }
+  name                 = "${each.value.prefix}-${random_pet.random.id}-ext"
+  virtual_machine_id   = azurerm_linux_virtual_machine.vm[each.key].id
   publisher            = "Microsoft.Azure.Extensions"
   type                 = "CustomScript"
   type_handler_version = "2.1"
@@ -74,7 +77,7 @@ resource "azurerm_virtual_machine_extension" "amd64vmext" {
   {
     "script": "${base64encode(templatefile("install_agent.sh", {
   username     = "${var.admin_username}"
-  download_url = "https://github.com/actions/runner/releases/download/v2.299.1/actions-runner-linux-x64-2.299.1.tar.gz",
+  download_url = "${each.value.runnerDownloadUrl}",
   token        = "${var.actions_token}"
 }))}"
   }
