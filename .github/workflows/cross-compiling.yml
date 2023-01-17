@@ -38,4 +38,5 @@ jobs:
         labels: murilobeltrame/wineyard-api
         # List of target platforms for build
         platforms: linux/amd64,linux/arm64
+        push: true
         tags: ${{ matrix.version }}
