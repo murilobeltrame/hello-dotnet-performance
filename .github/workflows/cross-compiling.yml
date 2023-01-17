@@ -34,9 +34,9 @@ jobs:
         context: src/
         # Path to the Dockerfile
         file: src/Wineyard.Api.${{ matrix.version }}/Dockerfile
-        # List of metadata for an image
-        labels: murilobeltrame/wineyard-api
         # List of target platforms for build
         platforms: linux/amd64,linux/arm64
+        # Push is a shorthand for --output=type=registry
         push: true
-        tags: ${{ matrix.version }}
+        # List of tags
+        tags: murilobeltrame/wineyard-api:${{ matrix.version }}
