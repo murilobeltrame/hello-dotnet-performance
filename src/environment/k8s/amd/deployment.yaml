@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wineyard-amd
+spec:
+  selector:
+    matchLabels:
+      app: wineyard-amd
+  template:
+    metadata:
+      labels:
+        app: wineyard-amd
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+        "kubernetes.io/arch": amd64
+      containers:
+      - name: wineyard-amd
+        image: murilobeltrame/wineyard-api:7
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000

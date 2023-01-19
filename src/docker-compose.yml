@@ -1,15 +1,14 @@
-version: '3.4'
-
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: src
 services:
-  wineyard.api.6:
-    image: ${DOCKER_REGISTRY-}wineyardapi
-    build:
-      context: .
-      dockerfile: Wineyard.Api.6/Dockerfile
-
-  wineyard.api.7:
-    image: ${DOCKER_REGISTRY-}wineyardapi
-    build:
-      context: .
-      dockerfile: Wineyard.Api.7/Dockerfile
-
+- name: wineyard.api.6
+  image: ${DOCKER_REGISTRY-}wineyardapi
+  dockerFile: Wineyard.Api.6/Dockerfile
+- name: wineyard.api.7
+  image: ${DOCKER_REGISTRY-}wineyardapi
+  dockerFile: Wineyard.Api.7/Dockerfile
