@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Wineyard.Models;
+using Wineyard.Tools;
 
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
@@ -15,6 +16,9 @@ using IHost host = Host.CreateDefaultBuilder(args)
                 o.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
     })
     .Build();
+
+using var scope = host.Services.CreateScope();
+scope.ServiceProvider.GetRequiredService<DbInitializer>().Run();
 
 await host.RunAsync();
 
