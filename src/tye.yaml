@@ -20,8 +20,12 @@ services:
 - name: wineyard-db
   image: postgres:11.17-alpine
   env:
+    - name: POSTGRES_USER
+      value: postgres
     - name: POSTGRES_PASSWORD
-      value: MyS3creTp@ssw0rd!
+      value: password
+    - name: POSTGRES_DB
+      value: wineyard-db
   bindings:
     - port: 54321
       containerPort: 5432

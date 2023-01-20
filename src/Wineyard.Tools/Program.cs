@@ -14,6 +14,7 @@ using IHost host = Host.CreateDefaultBuilder(args)
         services.AddDbContext<ApplicationContext>(options =>
             options.UseNpgsql(connectionString, o =>
                 o.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
+        services.AddTransient<DbInitializer>();
     })
     .Build();
 
