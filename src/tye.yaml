@@ -34,5 +34,5 @@ services:
   project: Wineyard.Api.6/Wineyard.Api.6.csproj
 - name: wineyard-api-7
   project: Wineyard.Api.7/Wineyard.Api.7.csproj
-- name: wineyard-tools
-  project: Wineyard.Tools/Wineyard.Tools.csproj
+# - name: wineyard-tools
+#   project: Wineyard.Tools/Wineyard.Tools.csproj
