@@ -4,7 +4,7 @@ using Wineyard.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("ApplicationContext");
+var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<ApplicationContext>(o => o.UseNpgsql(connectionString));
 
 builder.Services.AddControllers();

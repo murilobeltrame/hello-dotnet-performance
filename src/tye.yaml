@@ -5,7 +5,27 @@
 #    https://aka.ms/AA7q20u
 #
 name: wineyard
+
+ingress:
+  - name: ingress
+    bindings:
+      - port: 8090
+    rules:
+      - path: /v6
+        service: wineyard-api-6
+      - path: /v7
+        service: wineyard-api-7
+
 services:
+- name: wineyard-db
+  image: postgres:11.17-alpine
+  env:
+    - name: POSTGRES_PASSWORD
+      value: MyS3creTp@ssw0rd!
+  bindings:
+    - port: 54321
+      containerPort: 5432
+      connectionString: Server=${host};Port=${port};User Id=${env:POSTGRES_USER};Password=${env:POSTGRES_PASSWORD};
 - name: wineyard-api-6
   project: Wineyard.Api.6/Wineyard.Api.6.csproj
 - name: wineyard-api-7
