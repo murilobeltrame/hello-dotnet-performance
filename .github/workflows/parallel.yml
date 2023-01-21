@@ -34,4 +34,4 @@ jobs:
         # Push is a shorthand for --output=type=registry
         push: true
         # List of tags
-        tags: murilobeltrame/wineyard-api:7
+        tags: murilobeltrame/wineyard-api:7-${{matrix.platform}}
