@@ -18,12 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Models\" />
     <None Remove="Npgsql.EntityFrameworkCore.PostgreSQL" />
     <None Remove="Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>

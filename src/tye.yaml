@@ -21,7 +21,7 @@ services:
   image: postgres:11.17-alpine
   env:
     - name: POSTGRES_USER
-      value: postgres
+      value: wineyard-dbuser
     - name: POSTGRES_PASSWORD
       value: password
     - name: POSTGRES_DB
@@ -29,10 +29,10 @@ services:
   bindings:
     - port: 54321
       containerPort: 5432
-      connectionString: Server=${host};Port=${port};User Id=${env:POSTGRES_USER};Password=${env:POSTGRES_PASSWORD};
+      connectionString: Server=${host};Port=${port};Database=${env:POSTGRES_DB};User Id=${env:POSTGRES_USER};Password=${env:POSTGRES_PASSWORD};
 - name: wineyard-api-6
   project: Wineyard.Api.6/Wineyard.Api.6.csproj
 - name: wineyard-api-7
   project: Wineyard.Api.7/Wineyard.Api.7.csproj
-# - name: wineyard-tools
-#   project: Wineyard.Tools/Wineyard.Tools.csproj
+- name: wineyard-tools
+  project: Wineyard.Tools/Wineyard.Tools.csproj

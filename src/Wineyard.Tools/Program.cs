@@ -9,11 +9,10 @@ using Wineyard.Tools;
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
-        var connectionString = context.Configuration
-            .GetSection("ConnectionStrings:Default").Value;
-        services.AddDbContext<ApplicationContext>(options =>
-            options.UseNpgsql(connectionString, o =>
-                o.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
+        var config = context.Configuration;
+        var connectionString = config["ConnectionStrings:wineyard-db"];
+        var migrationAssembly = Assembly.GetExecutingAssembly().FullName;
+        services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString, o => o.MigrationsAssembly(migrationAssembly)));
         services.AddTransient<DbInitializer>();
     })
     .Build();
@@ -21,5 +20,6 @@ using IHost host = Host.CreateDefaultBuilder(args)
 using var scope = host.Services.CreateScope();
 scope.ServiceProvider.GetRequiredService<DbInitializer>().Run();
 
-await host.RunAsync();
+// host.Services.GetRequiredService<DbInitializer>().Run();
 
+host.Run();
