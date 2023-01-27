@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wineyard-arm
+  name: wineyard-7-amd
 spec:
   selector:
     matchLabels:
-      app: wineyard-arm
+      app: wineyard-7-amd
   template:
     metadata:
       labels:
-        app: wineyard-arm
+        app: wineyard-7-amd
     spec:
       nodeSelector:
         "kubernetes.io/os": linux
-        "kubernetes.io/arch": arm64
+        "kubernetes.io/arch": amd64
       containers:
-      - name: wineyard-arm
-        image: murilobeltrame/wineyard-api:7
+      - name: wineyard-7-amd
+        image: murilobeltrame/wineyard-api:6
         resources:
           limits:
             memory: "128Mi"

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wineyard-7-arm
+spec:
+  selector:
+    matchLabels:
+      app: wineyard-7-arm
+  template:
+    metadata:
+      labels:
+        app: wineyard-7-arm
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+        "kubernetes.io/arch": arm64
+      containers:
+      - name: wineyard-7-arm
+        image: murilobeltrame/wineyard-api:6
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000

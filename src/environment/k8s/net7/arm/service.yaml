@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wineyard-amd
+  name: wineyard-7-arm
 spec:
   selector:
-    app: wineyard-amd
+    app: wineyard-7-arm
   ports:
   - port: 3000

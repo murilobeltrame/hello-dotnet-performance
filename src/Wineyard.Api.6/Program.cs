@@ -16,7 +16,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();
-app.UseSwaggerUI(o => o.RoutePrefix = string.Empty);
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
